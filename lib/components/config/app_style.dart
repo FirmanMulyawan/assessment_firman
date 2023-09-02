@@ -67,7 +67,6 @@ class AppStyle {
           Widget? iconSuffix,
           Color? enableBorderColor,
           Color? focusBorderColor,
-          Color? errorBorderColor,
           String? errorText,
           int? errorMaxLines,
           bool isEnable = true}) =>
@@ -89,13 +88,11 @@ class AppStyle {
         hintStyle: OpenSansFont.style14(textColor: AppStyle.lightGrey02),
         errorText: errorText,
         focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: errorBorderColor ?? AppStyle.red500, width: 1.1),
+          borderSide: const BorderSide(color: AppStyle.red500, width: 1.1),
           borderRadius: borderRadiusSmall(),
         ),
         errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: errorBorderColor ?? AppStyle.red500, width: 1.1),
+          borderSide: const BorderSide(color: AppStyle.red500, width: 1.1),
           borderRadius: borderRadiusSmall(),
         ),
         errorMaxLines: errorMaxLines,

@@ -1,9 +1,9 @@
-class HomeTransactionHistoryResponseModel {
+class HomeResponseModel {
   List<Teams>? teams;
 
-  HomeTransactionHistoryResponseModel({this.teams});
+  HomeResponseModel({this.teams});
 
-  HomeTransactionHistoryResponseModel.fromJson(Map<String, dynamic> json) {
+  HomeResponseModel.fromJson(Map<String, dynamic> json) {
     if (json['teams'] != null) {
       teams = <Teams>[];
       json['teams'].forEach((v) {

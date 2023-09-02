@@ -1,22 +1,24 @@
-import '../../../../components/base/base_repository.dart';
-import '../../../../components/util/state.dart';
-import 'home_transaction_history_datasource.dart';
-import '../model/home_transaction_history_response_model.dart';
-import '../model/home_transaction_history_request_model.dart';
+import '../../../components/base/base_repository.dart';
+import '../../../components/util/state.dart';
 
-class HomePageRepository extends BaseRepository {
-  final HomePageDataSource _dataSource;
-  HomePageRepository(this._dataSource);
+import '../model/home_request_model.dart';
+import '../model/home_response_model.dart';
+
+import './home_datasource.dart';
+
+class HomeRepository extends BaseRepository {
+  final HomeDataSource _dataSource;
+  HomeRepository(this._dataSource);
 
   void getListNewTransaction({
     required ResponseHandler<List<Teams>> response,
-    required HomeTransactionHistoryRequestModel req,
+    required HomeRequestModel req,
   }) async {
     try {
       final data =
           await _dataSource.apiGetListHistory(req: req).then(mapToData).then(
         (value) {
-          final response = HomeTransactionHistoryResponseModel.fromJson(value);
+          final response = HomeResponseModel.fromJson(value);
           List<Teams> list = [];
           if (response.teams != null) {
             for (var e in response.teams!) {

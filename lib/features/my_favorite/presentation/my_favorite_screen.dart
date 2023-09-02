@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../components/config/app_const.dart';
 import './my_favorite_controller.dart';
+import '../../../components/config/app_const.dart';
 
 class MyFavoriteScreen extends GetView<MyFavoriteController> {
   const MyFavoriteScreen({super.key});

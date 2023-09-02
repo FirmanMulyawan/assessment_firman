@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../../components/widget/shimmer_loading.dart';
+
+import '../../../../components/widget/shimmer_loading.dart';
 
 class ItemLoadingHome extends StatelessWidget {
   const ItemLoadingHome({super.key});

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../components/util/storage_util.dart';
 import '../../my_favorite/presentation/my_favorite_screen.dart';
-import 'homepage/homepage_screen.dart';
+import '../../home/presentation/home_screen.dart';
 
 class HomeNavigationController extends GetxController {
   HomeNavigationController({
@@ -14,7 +14,7 @@ class HomeNavigationController extends GetxController {
   final StorageUtil storageUtil;
 
   List<Widget> widgetList = <Widget>[
-    const HomePageScreen(),
+    const HomeScreen(),
     const MyFavoriteScreen(),
   ];
 

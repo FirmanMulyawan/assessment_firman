@@ -17,7 +17,6 @@ class WidgetSearchInput extends StatelessWidget {
   final Function(String)? onFieldSubmitted;
   final Function(String)? onChanged;
   final String? errorText;
-  final Color? errorBorderColor;
   final int? errorMaxLines;
 
   const WidgetSearchInput(
@@ -34,7 +33,6 @@ class WidgetSearchInput extends StatelessWidget {
       this.errorText,
       this.onChanged,
       this.enableInteractiveSelection = false,
-      this.errorBorderColor,
       this.initialValue})
       : super(key: key);
 
@@ -78,7 +76,6 @@ class WidgetSearchInput extends StatelessWidget {
         decoration: AppStyle.textInputDecorator(
           // isEnable:
           // iconSuffix:
-          errorBorderColor: errorBorderColor,
           errorText: errorText,
           errorMaxLines: errorMaxLines,
           enableBorderColor: AppStyle.lightGrey,

@@ -1,17 +1,18 @@
-import 'package:assessment_firman/components/widget/search_input.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../components/config/app_style.dart';
-import '../../../../components/widget/empty_data.dart';
+import '../../../components/config/app_style.dart';
+import '../../../components/widget/empty_data.dart';
+import '../../../components/widget/card_item.dart';
+import '../../../components/widget/search_input.dart';
+import '../../../components/config/app_const.dart';
 
-import 'widget_home_page/item_loading_home.dart';
-import 'homepage_controller.dart';
-import './homepage_state.dart';
-import './widget_home_page/card_item.dart';
+import './widget_home_page/item_loading_home.dart';
+import '../homepage_state.dart';
+import './home_controller.dart';
 
-class HomePageScreen extends GetView<HomePageController> {
-  const HomePageScreen({super.key});
+class HomeScreen extends GetView<HomeController> {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,34 +24,45 @@ class HomePageScreen extends GetView<HomePageController> {
 
   _appBar() {
     return AppBar(
-      centerTitle: true,
-      elevation: 3,
-      title: const WidgetSearchInput(
-        hintText: 'Search ',
-        keyboardType: TextInputType.text,
-        textInputAction: TextInputAction.done,
-      ),
-    );
+        centerTitle: true,
+        elevation: 3,
+        title: GetBuilder<HomeController>(builder: (ctx) {
+          return WidgetSearchInput(
+            hintText: 'Search ',
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.done,
+            errorMaxLines: 2,
+            enableInteractiveSelection: false,
+            controller: ctx.searchCtr,
+            readOnly: ctx.list.isEmpty ? true : false,
+          );
+        }));
   }
 
   Widget _productPrice(BuildContext context) {
-    return GetBuilder<HomePageController>(builder: (ctrl) {
+    return GetBuilder<HomeController>(builder: (ctrl) {
       final state = ctrl.state;
+      final listData = ctrl.list;
       final width = MediaQuery.of(context).size.width;
       final height = MediaQuery.of(context).size.height;
 
       if (state is HomePageLoadSuccess) {
         List<Widget> output = [];
         output.add(const SizedBox(height: 10));
-        for (var element in ctrl.list) {
+        for (var i = 0; i < listData.length; i++) {
           output.add(
             CardItem(
-              data: element,
-              onTap: () => ctrl.toDetailProduct(element),
+              data: listData[i],
+              onTap: () => ctrl.toDetailProduct(listData[i]),
+              onTapfavorite: () => ctrl.toggleFavoriteList(i),
+              assetItem: ctrl.favoriteList[i] == true
+                  ? AppConst.assetFavoriteBadge
+                  : AppConst.assetNotFavoriteBadge,
             ),
           );
         }
         output.add(const SizedBox(height: 100));
+
         return Column(
           children: [
             Expanded(
@@ -75,9 +87,9 @@ class HomePageScreen extends GetView<HomePageController> {
                 ),
               ),
             ),
-            // SizedBox(
-            //   height: height * 0.07,
-            // ),
+            SizedBox(
+              height: height * 0.07,
+            ),
           ],
         );
       }

@@ -21,11 +21,14 @@ class WidgetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashFactory: NoSplash.splashFactory,
-      onTap: onTap,
-      child: Column(mainAxisSize: MainAxisSize.min, children: [
-        ClipRRect(
+    return Column(mainAxisSize: MainAxisSize.min, children: [
+      InkWell(
+        splashFactory: NoSplash.splashFactory,
+        onTap: onTap,
+        customBorder: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
                 width: double.infinity,
@@ -39,12 +42,11 @@ class WidgetButton extends StatelessWidget {
                       // ignore: deprecated_member_use
                       color: colorIcon),
                 ))),
-        Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child:
-              Text(buttonName, textAlign: TextAlign.center, style: styletext),
-        ),
-      ]),
-    );
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 5),
+        child: Text(buttonName, textAlign: TextAlign.center, style: styletext),
+      ),
+    ]);
   }
 }

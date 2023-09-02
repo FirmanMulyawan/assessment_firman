@@ -1,9 +1,9 @@
-class HomeTransactionHistoryRequestModel {
+class HomeRequestModel {
   String? l;
 
-  HomeTransactionHistoryRequestModel({this.l});
+  HomeRequestModel({this.l});
 
-  HomeTransactionHistoryRequestModel.fromJson(Map<String, dynamic> json) {
+  HomeRequestModel.fromJson(Map<String, dynamic> json) {
     l = json['l'];
   }
 

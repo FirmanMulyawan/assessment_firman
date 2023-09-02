@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
-import 'package:assessment_firman/features/home/model/home_transaction_history_response_model.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../home/model/home_response_model.dart';
 
 class DetailTeamController extends GetxController {
   DetailTeamController();
@@ -12,6 +14,7 @@ class DetailTeamController extends GetxController {
   String strInstagram = '';
   String strDescriptionEN = '';
   String strYoutube = '';
+  String strTeamBadge = '';
 
   @override
   void onInit() {
@@ -26,6 +29,40 @@ class DetailTeamController extends GetxController {
     strInstagram = dataArgs.strInstagram ?? '';
     strDescriptionEN = dataArgs.strDescriptionEN ?? '';
     strYoutube = dataArgs.strYoutube ?? '';
+    strTeamBadge = dataArgs.strTeamBadge ?? '';
     super.onInit();
+  }
+
+  void handleLinkUrl(socialMedia) {
+    var url = strWebsite;
+    if (socialMedia == "Website") {
+    } else if (socialMedia == "Facebook") {
+      url = strFacebook;
+    } else if (socialMedia == "Instagram") {
+      url = strInstagram;
+    } else if (socialMedia == "Twitter") {
+      url = strTwitter;
+    } else if (socialMedia == "Youtube") {
+      url = strYoutube;
+    }
+
+    if (url.isNotEmpty) {
+      openBrowserUrl(url);
+    }
+  }
+
+  void openBrowserUrl(String urls) async {
+    // 'https://google.com'
+    var url = Uri.parse(urls);
+
+    try {
+      if (await canLaunchUrl(url)) {
+        launchUrl(url, mode: LaunchMode.externalApplication);
+      } else {
+        Get.snackbar("Error", "Data not Found");
+      }
+    } catch (e) {
+      Get.snackbar("Error", "Data not Found");
+    }
   }
 }
