@@ -29,7 +29,7 @@ class AppStyle {
   static const Color lightShadow = Color.fromRGBO(163, 168, 186, 0.3);
 
   // orange
-  static const Color orange = Color(0xFFDF7E1D);
+  static const Color orange = Color(0xFFFF6600);
   static const Color orange900 = Color(0xFFF9E9D9);
   static const Color secondaryGreen = Color(0xFF00A990);
 

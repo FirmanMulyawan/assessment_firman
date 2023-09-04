@@ -1,13 +1,14 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../components/config/app_style.dart';
 import '../../../components/widget/empty_data.dart';
 import '../../../components/widget/card_item.dart';
 import '../../../components/widget/search_input.dart';
 import '../../../components/config/app_const.dart';
-
-import './widget_home_page/item_loading_home.dart';
+import '../../../components/widget/item_loading_home.dart';
 import '../homepage_state.dart';
 import './home_controller.dart';
 
@@ -19,6 +20,49 @@ class HomeScreen extends GetView<HomeController> {
     return Scaffold(
         backgroundColor: AppStyle.white,
         appBar: _appBar(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+        floatingActionButton: GetBuilder<HomeController>(builder: (ctrl) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 80),
+            child: SpeedDial(
+              animatedIcon: AnimatedIcons.menu_close,
+              backgroundColor: AppStyle.blue,
+              spacing: 8.0,
+              children: [
+                SpeedDialChild(
+                  onTap: () {
+                    ctrl.changeLanguage('england');
+                  },
+                  label: 'United Kingdom',
+                  child: SvgPicture.asset(
+                    AppConst.assetUK,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                SpeedDialChild(
+                  onTap: () {
+                    ctrl.changeLanguage('spain');
+                  },
+                  label: 'Spain',
+                  child: SvgPicture.asset(
+                    AppConst.assetSpain,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                SpeedDialChild(
+                  onTap: () {
+                    ctrl.changeLanguage('italy');
+                  },
+                  label: 'Italy',
+                  child: SvgPicture.asset(
+                    AppConst.assetItaly,
+                    fit: BoxFit.contain,
+                  ),
+                )
+              ],
+            ),
+          );
+        }),
         body: _productPrice(context));
   }
 
@@ -35,6 +79,9 @@ class HomeScreen extends GetView<HomeController> {
             enableInteractiveSelection: false,
             controller: ctx.searchCtr,
             readOnly: ctx.list.isEmpty ? true : false,
+            onChanged: (value) {
+              ctx.onSearch(value);
+            },
           );
         }));
   }
@@ -48,13 +95,14 @@ class HomeScreen extends GetView<HomeController> {
 
       if (state is HomePageLoadSuccess) {
         List<Widget> output = [];
-        output.add(const SizedBox(height: 10));
+        output.add(const SizedBox(height: 5));
         for (var i = 0; i < listData.length; i++) {
           output.add(
             CardItem(
-              data: listData[i],
+              strTeam: listData[i].strTeam ?? '',
+              strTeamBadge: listData[i].strTeamBadge ?? '',
               onTap: () => ctrl.toDetailProduct(listData[i]),
-              onTapfavorite: () => ctrl.toggleFavoriteList(i),
+              handleRight: () => ctrl.toggleFavoriteList(i, listData[i]),
               assetItem: ctrl.favoriteList[i] == true
                   ? AppConst.assetFavoriteBadge
                   : AppConst.assetNotFavoriteBadge,
@@ -75,7 +123,7 @@ class HomeScreen extends GetView<HomeController> {
                       Future<void>.delayed(const Duration(seconds: 1)).then(
                     (value) => ctrl.onRefresh(),
                   ),
-                  color: AppStyle.bluePrimary,
+                  color: AppStyle.appTheme,
                   backgroundColor: AppStyle.white,
                   strokeWidth: 4.0,
                   child: SingleChildScrollView(
@@ -96,15 +144,23 @@ class HomeScreen extends GetView<HomeController> {
 
       if (state is HomePageLoading) {
         List<Widget> output = [];
+        output.add(const SizedBox(height: 5));
         for (var i = 0; i < 8; i++) {
           output.add(const ItemLoadingHome());
         }
+        output.add(const SizedBox(height: 100));
 
         return Column(
           children: [
-            SingleChildScrollView(
-              child: Column(
-                children: output,
+            Expanded(
+              child: SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: output,
+                  ),
+                ),
               ),
             ),
             SizedBox(

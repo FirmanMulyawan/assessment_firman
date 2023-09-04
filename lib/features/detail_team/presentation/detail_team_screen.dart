@@ -53,23 +53,6 @@ class DetailTeamScreen extends GetView<DetailTeamController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: 35,
-                        ),
-                        ReadMoreText(ctrl.strDescriptionEN,
-                            trimLines: 8,
-                            style: OpenSansFont.style14(
-                                textColor: AppStyle.appTheme.shade900),
-                            lessStyle: OpenSansFont.style16Bold(
-                                textColor: AppStyle.appTheme.shade900),
-                            trimMode: TrimMode.Line,
-                            trimCollapsedText: 'Show more',
-                            trimExpandedText: 'Show less',
-                            moreStyle: OpenSansFont.style16Bold(
-                                textColor: AppStyle.appTheme.shade900)),
-                        const SizedBox(
-                          height: 20,
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -102,6 +85,23 @@ class DetailTeamScreen extends GetView<DetailTeamController> {
                               ],
                             ),
                           ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        ReadMoreText(ctrl.currentLanguage,
+                            trimLines: 8,
+                            style: OpenSansFont.style14(
+                                textColor: AppStyle.appTheme.shade900),
+                            lessStyle: OpenSansFont.style16Bold(
+                                textColor: AppStyle.orange),
+                            trimMode: TrimMode.Line,
+                            trimCollapsedText: 'Show more',
+                            trimExpandedText: 'Show less',
+                            moreStyle: OpenSansFont.style16Bold(
+                                textColor: AppStyle.orange)),
+                        const SizedBox(
+                          height: 20,
                         ),
                       ],
                     ),

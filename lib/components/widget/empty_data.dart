@@ -30,7 +30,7 @@ class EmptyData extends StatelessWidget {
                   height: 22,
                 ),
                 Text(
-                  'Mohon maaf,\nData tidak Ditemukan',
+                  'sorry,\nData not found',
                   textAlign: TextAlign.center,
                   style: MontserratFont.style18Bold(
                       textColor: const Color(0xFF333333)),

@@ -3,7 +3,7 @@ import '../ext/string_ext.dart';
 
 class StorageUtil {
   final IStorage _storage;
-  final String _userId = "userId";
+  final String _language = "language";
   final String _currentSelectedMenuBottomNavigation =
       'currentSelectedMenuBottomNavigation';
   //
@@ -16,10 +16,10 @@ class StorageUtil {
   setDeviceId(String deviceId) async =>
       await _storage.write(key: _deviceId, value: deviceId);
 
-  Future<String?> getUserId() => _storage.read(key: _userId);
+  Future<String?> getLanguage() => _storage.read(key: _language);
 
-  setUserId(String userId) async =>
-      await _storage.write(key: _userId, value: userId);
+  setLanguage(String language) async =>
+      await _storage.write(key: _language, value: language);
 
   Future<int?> currentSelectedMenuBottomNavigation() =>
       _storage.readInt(key: _currentSelectedMenuBottomNavigation);

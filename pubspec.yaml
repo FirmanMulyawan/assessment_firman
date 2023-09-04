@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  firebase_core: ^2.14.0
+  firebase_database: ^10.2.5
   dio: ^5.1.2
   cached_network_image: ^3.2.1
   flutter_secure_storage: ^8.0.0
@@ -19,6 +21,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   shimmer: ^3.0.0
   flutter_launcher_icons: ^0.13.1
+  flutter_speed_dial: ^7.0.0
   device_info_plus: ^9.0.2
   url_launcher: ^6.1.6
   readmore: ^2.1.0

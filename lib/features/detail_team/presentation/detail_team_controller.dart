@@ -1,3 +1,4 @@
+import 'package:assessment_firman/components/config/app_style.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,14 +13,14 @@ class DetailTeamController extends GetxController {
   String strFacebook = '';
   String strTwitter = '';
   String strInstagram = '';
-  String strDescriptionEN = '';
+  String currentLanguage = '';
   String strYoutube = '';
   String strTeamBadge = '';
 
   @override
   void onInit() {
     var data = Get.arguments;
-    Teams dataArgs = data;
+    Teams dataArgs = data[0];
     strTeam = dataArgs.strTeam ?? '';
     intFormedYear = dataArgs.intFormedYear ?? '';
     strStadium = dataArgs.strStadium ?? '';
@@ -27,7 +28,7 @@ class DetailTeamController extends GetxController {
     strFacebook = dataArgs.strFacebook ?? '';
     strTwitter = dataArgs.strTwitter ?? '';
     strInstagram = dataArgs.strInstagram ?? '';
-    strDescriptionEN = dataArgs.strDescriptionEN ?? '';
+    currentLanguage = data[1];
     strYoutube = dataArgs.strYoutube ?? '';
     strTeamBadge = dataArgs.strTeamBadge ?? '';
     super.onInit();
@@ -59,10 +60,22 @@ class DetailTeamController extends GetxController {
       if (await canLaunchUrl(url)) {
         launchUrl(url, mode: LaunchMode.externalApplication);
       } else {
-        Get.snackbar("Error", "Data not Found");
+        Get.snackbar(
+          "Error",
+          'Data not Found',
+          snackPosition: SnackPosition.TOP,
+          colorText: AppStyle.white,
+          backgroundColor: AppStyle.secondaryGreen,
+        );
       }
     } catch (e) {
-      Get.snackbar("Error", "Data not Found");
+      Get.snackbar(
+        "Error",
+        'Data not Found',
+        snackPosition: SnackPosition.TOP,
+        colorText: AppStyle.white,
+        backgroundColor: AppStyle.secondaryGreen,
+      );
     }
   }
 }
