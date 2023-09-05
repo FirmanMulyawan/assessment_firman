@@ -60,8 +60,8 @@ class MyFavoriteController extends GetxController {
   }
 
   void toDeleteListFav(key, index) async {
-    await fb.child("listFav").child(key).remove();
     _homeController.favoriteList[index] = false;
     update();
+    await fb.child("listFav").child(key).remove();
   }
 }

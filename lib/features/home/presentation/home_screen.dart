@@ -17,53 +17,56 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: AppStyle.white,
-        appBar: _appBar(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-        floatingActionButton: GetBuilder<HomeController>(builder: (ctrl) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 80),
-            child: SpeedDial(
-              animatedIcon: AnimatedIcons.menu_close,
-              backgroundColor: AppStyle.blue,
-              spacing: 8.0,
-              children: [
-                SpeedDialChild(
-                  onTap: () {
-                    ctrl.changeLanguage('england');
-                  },
-                  label: 'United Kingdom',
-                  child: SvgPicture.asset(
-                    AppConst.assetUK,
-                    fit: BoxFit.contain,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+          backgroundColor: AppStyle.white,
+          appBar: _appBar(),
+          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+          floatingActionButton: GetBuilder<HomeController>(builder: (ctrl) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 80),
+              child: SpeedDial(
+                animatedIcon: AnimatedIcons.menu_close,
+                backgroundColor: AppStyle.blue,
+                spacing: 8.0,
+                children: [
+                  SpeedDialChild(
+                    onTap: () {
+                      ctrl.changeLanguage('england');
+                    },
+                    label: 'United Kingdom',
+                    child: SvgPicture.asset(
+                      AppConst.assetUK,
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                ),
-                SpeedDialChild(
-                  onTap: () {
-                    ctrl.changeLanguage('spain');
-                  },
-                  label: 'Spain',
-                  child: SvgPicture.asset(
-                    AppConst.assetSpain,
-                    fit: BoxFit.contain,
+                  SpeedDialChild(
+                    onTap: () {
+                      ctrl.changeLanguage('spain');
+                    },
+                    label: 'Spain',
+                    child: SvgPicture.asset(
+                      AppConst.assetSpain,
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                ),
-                SpeedDialChild(
-                  onTap: () {
-                    ctrl.changeLanguage('italy');
-                  },
-                  label: 'Italy',
-                  child: SvgPicture.asset(
-                    AppConst.assetItaly,
-                    fit: BoxFit.contain,
-                  ),
-                )
-              ],
-            ),
-          );
-        }),
-        body: _productPrice(context));
+                  SpeedDialChild(
+                    onTap: () {
+                      ctrl.changeLanguage('italy');
+                    },
+                    label: 'Italy',
+                    child: SvgPicture.asset(
+                      AppConst.assetItaly,
+                      fit: BoxFit.contain,
+                    ),
+                  )
+                ],
+              ),
+            );
+          }),
+          body: _productPrice(context)),
+    );
   }
 
   _appBar() {
@@ -127,6 +130,8 @@ class HomeScreen extends GetView<HomeController> {
                   backgroundColor: AppStyle.white,
                   strokeWidth: 4.0,
                   child: SingleChildScrollView(
+                    keyboardDismissBehavior:
+                        ScrollViewKeyboardDismissBehavior.onDrag,
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: Column(
                       children: output,

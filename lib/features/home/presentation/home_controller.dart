@@ -17,6 +17,7 @@ class HomeController extends GetxController {
 
   final fb = FirebaseDatabase.instance.ref();
   List<Teams> list = [];
+  List<Teams> searchList = [];
   HomePageState state = HomePageIdle();
   List<bool?> favoriteList = [];
   TextEditingController searchCtr = TextEditingController();
@@ -30,15 +31,12 @@ class HomeController extends GetxController {
   }
 
   void onSearch(String value) {
-    // final s = list.where((element) {
-    //   final strTeam = element.strTeam?.toLowerCase();
-    //   final query = value.toLowerCase();
-
-    //   return strTeam!.contains(query);
-    // }).toList();
-
-    // list = s;
-    // update();
+    list = searchList.where((element) {
+      final strTeam = element.strTeam?.toLowerCase();
+      final query = value.toLowerCase();
+      return strTeam!.contains(query);
+    }).toList();
+    update();
   }
 
   void onRefresh() {
@@ -52,6 +50,7 @@ class HomeController extends GetxController {
       req: HomeRequestModel(l: 'English Premier League'),
       response: ResponseHandler(
           onSuccess: (data) {
+            searchList = data;
             list = data;
             for (var i = 0; i < data.length; i++) {
               favoriteList.add(true);
@@ -135,5 +134,11 @@ class HomeController extends GetxController {
     } else if (lang == "italy") {
       _storageUtil.setLanguage('italy');
     }
+  }
+
+  @override
+  void onClose() {
+    searchCtr.dispose();
+    super.onClose();
   }
 }
